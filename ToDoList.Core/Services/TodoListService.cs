@@ -13,13 +13,16 @@ namespace ToDoList.Core.Services
     public class TodoListService : ITodoListService
     {
         private readonly ICreateListRequestValidator _createValidator;
+        private readonly IAddTaskToListRequestValidator _addTaskValidator;
         private readonly ITodoListRepository _repository;
 
         public TodoListService(
             ICreateListRequestValidator createValidator,
+            IAddTaskToListRequestValidator addTaskValidator,
             ITodoListRepository repository)
         {
             _createValidator = createValidator;
+            _addTaskValidator = addTaskValidator;
             _repository = repository;
         }
 
@@ -38,9 +41,19 @@ namespace ToDoList.Core.Services
             return todoList;
         }
 
-        public ValueTask<Result> AddTaskToListAsync(AddTaskToListRequest request, CancellationToken cancellationToken)
+        public async ValueTask<Result> AddTaskToListAsync(AddTaskToListRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var validationResult = _addTaskValidator.Validate(request);
+            if (validationResult.HasError)
+            {
+                return validationResult;
+            }
+
+            var newTask = new TodoTask(request.Task!.Description!, request.Task.IsDone, request.TodoList!);
+
+            await _repository.AddTaskToListAsync(request.TodoList!, newTask, cancellationToken).ConfigureAwait(false);
+
+            return Result.Success();
         }
     }
 }

@@ -2,7 +2,7 @@
 {
   public partial class AddTaskToListRequest
     {
-    public class TodoTaskDto
+        public class TodoTaskDto
         {
             public string? Description { get; set; }
             public bool IsDone { get; set; }
