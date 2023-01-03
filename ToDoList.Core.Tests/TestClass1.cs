@@ -1,11 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using ToDoList.Core.Models.Domain;
+﻿using Xunit;
 using ToDoList.Core.Services;
 
 namespace ToDoList.Core.Tests
 {
-    [TestClass]
     public class TestClass1
     {
         private readonly TodoListService _service;
@@ -13,7 +10,7 @@ namespace ToDoList.Core.Tests
         {
             _service = service;
         }
-        [TestMethod]
+        [Fact]
         public async void Test1()
         {
             var request = new Models.Requests.CreateListRequest
@@ -22,7 +19,7 @@ namespace ToDoList.Core.Tests
             };
             var list = await _service.CreateListAsync(request, new System.Threading.CancellationToken());
             var title = list.Value.Title;
-            Assert.AreEqual(title, "test");
+            Assert.Equal("test", title);
         }
     }
 }
