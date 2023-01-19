@@ -5,7 +5,7 @@ using ToDoList.Core.Models.Results;
 
 namespace ToDoList.Core.Validators
 {
-  internal class CreateListRequestValidator : ICreateListRequestValidator
+    public class CreateListRequestValidator : ICreateListRequestValidator
     {
         public Result Validate(CreateListRequest request)
         {

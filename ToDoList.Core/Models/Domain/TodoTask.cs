@@ -6,9 +6,9 @@
     public string Description { get; internal set; }
     public bool IsDone { get; internal set; }
 
-    public TodoList Parent { get; internal set; }
+    public TodoListModel Parent { get; internal set; }
 
-    internal TodoTask(string description, bool isDone, TodoList parent)
+    internal TodoTask(string description, bool isDone, TodoListModel parent)
     {
       Description = description;
       IsDone = isDone;

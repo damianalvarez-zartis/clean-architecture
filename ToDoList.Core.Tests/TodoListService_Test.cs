@@ -36,8 +36,8 @@ namespace ToDoList.Core.Tests
             var result = await service.CreateListAsync(createListRequest, cancellationToken);
 
             // Assert
-            Assert.IsType<Result<TodoList>>(result);
-            Assert.IsType<TodoList>(result.Value);
+            Assert.IsType<Result<TodoListModel>>(result);
+            Assert.IsType<TodoListModel>(result.Value);
             Assert.NotNull(result.Value);
             createValidatorMock.Verify(x => x.Validate(createListRequest), Times.AtLeastOnce);
             addValidatorMock.Verify(x => x.Validate(null), Times.Never);

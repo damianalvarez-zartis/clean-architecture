@@ -9,6 +9,6 @@ namespace ToDoList.Core.Abstractions.Services
     public interface ITodoListService
     {
         ValueTask<Result> AddTaskToListAsync(AddTaskToListRequest request, CancellationToken cancellationToken);
-        ValueTask<Result<TodoList>> CreateListAsync(CreateListRequest request, CancellationToken cancellationToken);
+        ValueTask<Result<TodoListModel>> CreateListAsync(CreateListRequest request, CancellationToken cancellationToken);
     }
 }
