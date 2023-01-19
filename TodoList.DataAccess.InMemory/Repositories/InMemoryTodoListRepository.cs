@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TodoList.DataAccess.InMemory.Extensions;
@@ -45,6 +47,20 @@ namespace TodoList.DataAccess.InMemory.Repositories
             }
 
             return new ValueTask();
+        }
+
+        public ValueTask<TodoListModel?> GetTodoListAsync(int id, CancellationToken cancellationToken)
+        {
+            var result = _cache.GetValueOrDefault(id);
+
+            return new ValueTask<TodoListModel?>(result);
+        }
+
+        public ValueTask<IList<TodoListModel>> GetTodoListsAsync(CancellationToken cancellationToken)
+        {
+            var result = _cache.Values.ToList();
+
+            return new ValueTask<IList<TodoListModel>>(result);
         }
     }
 }

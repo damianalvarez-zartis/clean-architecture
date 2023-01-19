@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using ToDoList.Core.Abstractions.Loggers;
@@ -60,6 +61,24 @@ namespace ToDoList.Core.Services
             await _repository.UpdateToDoListAsync(request.TodoList!, cancellationToken).ConfigureAwait(false);
 
             return Result.Success();
+        }
+
+        public async ValueTask<Result<TodoListModel>> GetListAsync(GetListRequest request, CancellationToken cancellationToken)
+        {
+            var toDoList = await _repository.GetTodoListAsync(request.Id, cancellationToken).ConfigureAwait(false);
+            if (toDoList is null)
+            {
+                return new Exception($"List with Id: {request.Id} was not found");
+            }
+
+            return toDoList;
+        }
+
+        public async ValueTask<Result<IList<TodoListModel>>> GetListsAsync(CancellationToken cancellationToken)
+        {
+            var lists = await _repository.GetTodoListsAsync(cancellationToken);
+
+            return Result < IList<TodoListModel>>.Success(lists);
         }
     }
 }

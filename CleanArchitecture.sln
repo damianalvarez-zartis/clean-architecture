@@ -11,11 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{054A4BE1-5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Core.Tests", "ToDoList.Core.Tests\ToDoList.Core.Tests.csproj", "{EF621C03-D367-4962-BC30-75028F0977C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList.Infrastructure", "TodoList.Infrastructure\TodoList.Infrastructure.csproj", "{C6DCEBE8-81E2-49AE-82E4-E9624517AFD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoList.Infrastructure", "TodoList.Infrastructure\TodoList.Infrastructure.csproj", "{C6DCEBE8-81E2-49AE-82E4-E9624517AFD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList.Console", "TodoList.Console\TodoList.Console.csproj", "{61003117-27AD-43E9-B9EE-AD54FD2F0B63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoList.Console", "TodoList.Console\TodoList.Console.csproj", "{61003117-27AD-43E9-B9EE-AD54FD2F0B63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList.DataAccess.InMemory", "TodoList.DataAccess.InMemory\TodoList.DataAccess.InMemory.csproj", "{5C3E5594-C5FA-456D-92C0-86BE9D528821}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoList.DataAccess.InMemory", "TodoList.DataAccess.InMemory\TodoList.DataAccess.InMemory.csproj", "{5C3E5594-C5FA-456D-92C0-86BE9D528821}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList.DataAccess.Database", "TodoList.DataAccess.Database\TodoList.DataAccess.Database.csproj", "{4CB2F8A3-8D85-4B66-8091-F5D1D8B2471C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{5C3E5594-C5FA-456D-92C0-86BE9D528821}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C3E5594-C5FA-456D-92C0-86BE9D528821}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C3E5594-C5FA-456D-92C0-86BE9D528821}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CB2F8A3-8D85-4B66-8091-F5D1D8B2471C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CB2F8A3-8D85-4B66-8091-F5D1D8B2471C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CB2F8A3-8D85-4B66-8091-F5D1D8B2471C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CB2F8A3-8D85-4B66-8091-F5D1D8B2471C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{C6DCEBE8-81E2-49AE-82E4-E9624517AFD7} = {B1C839E3-C090-47C8-8B8D-4C58BC168655}
 		{61003117-27AD-43E9-B9EE-AD54FD2F0B63} = {B1C839E3-C090-47C8-8B8D-4C58BC168655}
 		{5C3E5594-C5FA-456D-92C0-86BE9D528821} = {B1C839E3-C090-47C8-8B8D-4C58BC168655}
+		{4CB2F8A3-8D85-4B66-8091-F5D1D8B2471C} = {B1C839E3-C090-47C8-8B8D-4C58BC168655}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7FAF154-F1EA-4B60-AFA5-B9B70319D621}
