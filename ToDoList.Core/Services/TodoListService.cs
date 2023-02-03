@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using ToDoList.Core.Abstractions.Loggers;
 using ToDoList.Core.Abstractions.Repositories;
 using ToDoList.Core.Abstractions.Services;
 using ToDoList.Core.Abstractions.Validators;
@@ -15,18 +17,21 @@ namespace ToDoList.Core.Services
         private readonly ICreateListRequestValidator _createValidator;
         private readonly IAddTaskToListRequestValidator _addTaskValidator;
         private readonly ITodoListRepository _repository;
+        private readonly ILogger<TodoListService> _logger;
 
         public TodoListService(
             ICreateListRequestValidator createValidator,
             IAddTaskToListRequestValidator addTaskValidator,
-            ITodoListRepository repository)
+            ITodoListRepository repository,
+            ILogger<TodoListService> logger)
         {
             _createValidator = createValidator;
             _addTaskValidator = addTaskValidator;
             _repository = repository;
+            _logger = logger;
         }
 
-        public async ValueTask<Result<TodoList>> CreateListAsync(CreateListRequest request, CancellationToken cancellationToken)
+        public async ValueTask<Result<TodoListModel>> CreateListAsync(CreateListRequest request, CancellationToken cancellationToken)
         {
             var validationResult = _createValidator.Validate(request);
             if (validationResult.HasError)
@@ -34,9 +39,10 @@ namespace ToDoList.Core.Services
                 return validationResult;
             }
 
-            var todoList = new TodoList(request.Title!);
+            var todoList = new TodoListModel(request.Title!);
 
             await _repository.CreateListAsync(todoList, cancellationToken).ConfigureAwait(false);
+            _logger.Info("TodoList created {Id}", todoList.Id);
 
             return todoList;
         }
@@ -50,10 +56,29 @@ namespace ToDoList.Core.Services
             }
 
             var newTask = new TodoTask(request.Task!.Description!, request.Task.IsDone, request.TodoList!);
+            request.TodoList!.TodoTasks.Add(newTask);
 
-            await _repository.AddTaskToListAsync(request.TodoList!, newTask, cancellationToken).ConfigureAwait(false);
+            await _repository.UpdateToDoListAsync(request.TodoList!, cancellationToken).ConfigureAwait(false);
 
             return Result.Success();
+        }
+
+        public async ValueTask<Result<TodoListModel>> GetListAsync(GetListRequest request, CancellationToken cancellationToken)
+        {
+            var toDoList = await _repository.GetTodoListAsync(request.Id, cancellationToken).ConfigureAwait(false);
+            if (toDoList is null)
+            {
+                return new Exception($"List with Id: {request.Id} was not found");
+            }
+
+            return toDoList;
+        }
+
+        public async ValueTask<Result<IList<TodoListModel>>> GetListsAsync(CancellationToken cancellationToken)
+        {
+            var lists = await _repository.GetTodoListsAsync(cancellationToken);
+
+            return Result < IList<TodoListModel>>.Success(lists);
         }
     }
 }

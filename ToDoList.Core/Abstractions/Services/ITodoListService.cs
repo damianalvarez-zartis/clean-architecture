@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using ToDoList.Core.Models.Domain;
 using ToDoList.Core.Models.Requests;
@@ -9,6 +10,8 @@ namespace ToDoList.Core.Abstractions.Services
     public interface ITodoListService
     {
         ValueTask<Result> AddTaskToListAsync(AddTaskToListRequest request, CancellationToken cancellationToken);
-        ValueTask<Result<TodoList>> CreateListAsync(CreateListRequest request, CancellationToken cancellationToken);
+        ValueTask<Result<TodoListModel>> CreateListAsync(CreateListRequest request, CancellationToken cancellationToken);
+        ValueTask<Result<TodoListModel>> GetListAsync(GetListRequest request, CancellationToken cancellationToken);
+        ValueTask<Result<IList<TodoListModel>>> GetListsAsync(CancellationToken cancellationToken);
     }
 }

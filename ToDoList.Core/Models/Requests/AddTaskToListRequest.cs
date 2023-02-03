@@ -4,7 +4,7 @@ namespace ToDoList.Core.Models.Requests
 {
   public partial class AddTaskToListRequest
   {
-    public TodoList? TodoList { get; set; }
+    public TodoListModel? TodoList { get; set; }
     public TodoTaskDto? Task { get; set; }
   }
 }
