@@ -9,6 +9,7 @@ using ToDoList.Core.Abstractions.Repositories;
 using ToDoList.Core.Abstractions.Validators;
 using ToDoList.Core.Services;
 using System;
+using ToDoList.Core.Abstractions.Loggers;
 
 namespace ToDoList.Core.Tests
 {
@@ -21,9 +22,10 @@ namespace ToDoList.Core.Tests
             var createValidatorMock = new Mock<ICreateListRequestValidator>();
             var addValidatorMock = new Mock<IAddTaskToListRequestValidator>();
             var repositoryMock = new Mock<ITodoListRepository>();
+            var loggerMock = new Mock<ILogger<TodoListService>>();
             var cancellationToken = CancellationToken.None;
 
-            var service = new TodoListService(createValidatorMock.Object, addValidatorMock.Object, repositoryMock.Object);
+            var service = new TodoListService(createValidatorMock.Object, addValidatorMock.Object, repositoryMock.Object, loggerMock.Object);
 
             var createListRequest = new CreateListRequest
             {
@@ -51,12 +53,13 @@ namespace ToDoList.Core.Tests
             var createValidatorMock = new Mock<ICreateListRequestValidator>();
             var addValidatorMock = new Mock<IAddTaskToListRequestValidator>();
             var repositoryMock = new Mock<ITodoListRepository>();
+            var loggerMock = new Mock<ILogger<TodoListService>>();
             var cancellationToken = CancellationToken.None;
 
             createValidatorMock.Setup(x => x.Validate(null)).Throws<Exception>();
 
 
-            var service = new TodoListService(createValidatorMock.Object, addValidatorMock.Object, repositoryMock.Object);
+            var service = new TodoListService(createValidatorMock.Object, addValidatorMock.Object, repositoryMock.Object, loggerMock.Object);
 
             CreateListRequest createListRequest = null;
 

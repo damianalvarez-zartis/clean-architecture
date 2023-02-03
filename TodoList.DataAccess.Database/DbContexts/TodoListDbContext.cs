@@ -6,7 +6,11 @@ namespace TodoList.DataAccess.Database.DbContexts
 {
     public class TodoListDbContext : DbContext
     {
-        public virtual DbSet<TodoListModel> TodoLists { get; set; }
+        public TodoListDbContext(DbContextOptions<TodoListDbContext> options) : base(options)
+        {
+        }
+
+        public virtual DbSet<TodoListModel> TodoLists { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

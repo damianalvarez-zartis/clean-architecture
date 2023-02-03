@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ToDoList.Core\ToDoList.Core.csproj" />
+    <ProjectReference Include="..\TodoList.DataAccess.Database\TodoList.DataAccess.Database.csproj" />
     <ProjectReference Include="..\TodoList.DataAccess.InMemory\TodoList.DataAccess.InMemory.csproj" />
     <ProjectReference Include="..\TodoList.Infrastructure\TodoList.Infrastructure.csproj" />
   </ItemGroup>

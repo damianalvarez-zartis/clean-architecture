@@ -16,5 +16,7 @@ namespace ToDoList.Core.Models.Domain
 
             Title = title;
         }
+
+        internal TodoListModel() { }
     }
 }
